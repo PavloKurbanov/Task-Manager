@@ -1,10 +1,10 @@
 package Entities;
 
+import DataTime.TimeFormatter;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Task {
-
     private int id;
     private final String title;
     private Status status;
@@ -55,11 +55,7 @@ public class Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String formattedDate = dtf.format(dateTime);
-        String formattedDeadline = dtf.format(deadline);
-
-        return String.format("ID: %-2d | Назва: %-5s | Пріоритет: %-5s | Статус: %-5s | Дата створення: %s | Дедлайн: %s ",
-                id, title, priority.getPriority(), status.getStatusName(), formattedDate, formattedDeadline);
+        return String.format("ID: %-2d | Назва: %-5s | Пріоритет: %-5s | Статус: %-5s | Дата створення: %-10s | Дедлайн: %-10s ",
+                id, title, priority.getPriority(), status.getStatusName(), TimeFormatter.format(dateTime), TimeFormatter.format(deadline));
     }
 }

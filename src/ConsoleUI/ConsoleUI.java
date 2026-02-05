@@ -1,12 +1,13 @@
 package ConsoleUI;
 
+import DataTime.TimeFormatter;
 import Entities.Priority;
-import Entities.Status;
 import Entities.Task;
 import Service.TaskService;
 import Exception.TasksNotFoundException;
-import Exception.TaskListIsEmptyException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -60,11 +61,18 @@ public class ConsoleUI {
     private void addTask() {
         String name = readString("Введіть назву завдання: ");
         Priority priority = getPriority();
-        try {
-            taskService.add(new Task(0, name, priority));
+        System.out.println("Введіть дату дедлайну через ' - ' ");
+        LocalDateTime deadLine = null;
+        while (deadLine == null) {
+            try {
+                deadLine = LocalDateTime.parse(scanner.nextLine(), TimeFormatter.FORMATTER);
+            } catch (IllegalArgumentException e) {
+                System.err.println("ПОМИЛКА: " + e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.err.println("ПОМИЛКА: " + e.getMessage());
+            }
+            taskService.add(new Task(0, name, priority, deadLine));
             System.out.println("Завдання " + name + " успішно додано!");
-        } catch (IllegalArgumentException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
         }
     }
 
@@ -95,11 +103,11 @@ public class ConsoleUI {
 
         List<Task> allTasks = taskService.getAll();
 
-        if(allTasks.isEmpty()){
+        if (allTasks.isEmpty()) {
             System.out.println("Список порожній!");
         }
 
-        for(Task task : allTasks){
+        for (Task task : allTasks) {
             System.out.println(task);
         }
     }
@@ -107,10 +115,14 @@ public class ConsoleUI {
     private void getTaskByPriority() {
         Priority priority = getPriority();
         List<Task> tasksByPriority = taskService.getTasksByPriority(priority);
-        if(tasksByPriority.isEmpty()){
+        if (tasksByPriority.isEmpty()) {
             System.out.println("Не має задач з пріоритетом " + priority.getPriority());
-        } else{
-            System.out.println("Знайдено " + tasksByPriority.size() + " задач з пріоритетом " + priority.getPriority());
+        } else {
+            if (tasksByPriority.size() % 2 == 0) {
+                System.out.println("Знайдено " + tasksByPriority.size() + " задачі з пріоритетом " + priority.getPriority());
+            } else {
+                System.out.println("Знайдено " + tasksByPriority.size() + " задач з пріоритетом " + priority.getPriority());
+            }
             tasksByPriority.forEach(task -> System.out.println(task));
         }
     }
@@ -119,11 +131,11 @@ public class ConsoleUI {
         Priority[] priorities = Priority.values();
         Priority priority = null;
         do {
-            System.out.println("Оберіть пріоритет: ");
+            System.out.println("Виберіть пріоритет: ");
             for (int i = 0; i < priorities.length; i++) {
                 System.out.println((i + 1) + ". " + priorities[i].getPriority());
             }
-            int choice = readInt("Оберіть пріоритет: ");
+            int choice = Integer.parseInt(scanner.nextLine());
             if (choice >= 1 && choice <= priorities.length) {
                 priority = priorities[choice - 1];
             }
