@@ -91,25 +91,27 @@ public class ConsoleUI {
     }
 
     private void getAllTask() {
-        try {
-            System.out.println("Список всіх завдань: ");
-            List<Task> allTask = taskService.getAll();
-            for (Task task : allTask) {
-                System.out.println(task);
-            }
-        } catch (TaskListIsEmptyException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
+        System.out.println("Список завдань: ");
+
+        List<Task> allTasks = taskService.getAll();
+
+        if(allTasks.isEmpty()){
+            System.out.println("Список порожній!");
+        }
+
+        for(Task task : allTasks){
+            System.out.println(task);
         }
     }
 
     private void getTaskByPriority() {
         Priority priority = getPriority();
-        try {
-            System.out.println("Список завдань з пріоритетом " + priority.getPriority());
-            List<Task> tasksByPriority = taskService.getTasksByPriority(priority);
+        List<Task> tasksByPriority = taskService.getTasksByPriority(priority);
+        if(tasksByPriority.isEmpty()){
+            System.out.println("Не має задач з пріоритетом " + priority.getPriority());
+        } else{
+            System.out.println("Знайдено " + tasksByPriority.size() + " задач з пріоритетом " + priority.getPriority());
             tasksByPriority.forEach(task -> System.out.println(task));
-        } catch (TaskListIsEmptyException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
         }
     }
 
@@ -121,7 +123,7 @@ public class ConsoleUI {
             for (int i = 0; i < priorities.length; i++) {
                 System.out.println((i + 1) + ". " + priorities[i].getPriority());
             }
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = readInt("Оберіть пріоритет: ");
             if (choice >= 1 && choice <= priorities.length) {
                 priority = priorities[choice - 1];
             }

@@ -21,8 +21,13 @@ public class InMemoryRepositoryImpl implements TaskRepository {
 
     @Override
     public Task save(Task task) {
-        task.setId(id++);
-        tasks.add(task);
+        if(task.getId() == 0){
+            task.setId(id++);
+            tasks.add(task);
+        } else {
+            delete(task.getId());
+            tasks.add(task);
+        }
         return task;
     }
 
