@@ -26,7 +26,7 @@ public class ConsoleUI {
             System.out.println("1) Додати завдання");
             System.out.println("2) Видалити завдання");
             System.out.println("3) Змінити статус завдання");
-            System.out.println("4) Знайти завдання");
+            System.out.println("4) Знайти завдання по ID");
             System.out.println("5) Знайти завдання по пріоритету");
             System.out.println("6) Показати всі завдання");
             System.out.println("0) Вихід");
@@ -44,13 +44,16 @@ public class ConsoleUI {
                     updateTask();
                     break;
                 case "4":
-                    getAllTask();
+                    findTaskById();
                     break;
                 case "5":
                     getTaskByPriority();
                     break;
                 case "6":
                     getAllTask();
+                    break;
+                case "0":
+                    return;
                 default:
                     System.out.println("Введіть номер з пункту!");
                     break;
@@ -82,6 +85,18 @@ public class ConsoleUI {
         try {
             taskService.delete(deleteId);
             System.out.println("Завдання з ID " + deleteId + " успішно видалено");
+        } catch (TasksNotFoundException e) {
+            System.err.println("ПОМИЛКА: " + e.getMessage());
+        }
+    }
+
+    private void findTaskById() {
+        int id = readInt("Введіть ID завдання: ");
+        try{
+            Task byId = taskService.findById(id);
+            if(byId != null){
+                System.out.println(byId);
+            }
         } catch (TasksNotFoundException e) {
             System.err.println("ПОМИЛКА: " + e.getMessage());
         }
