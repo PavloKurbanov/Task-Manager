@@ -3,6 +3,7 @@ package ConsoleUI;
 import DataTime.TimeFormatter;
 import Entities.Priority;
 import Entities.Task;
+import InputRead.InputRead;
 import Service.TaskService;
 import Exception.TasksNotFoundException;
 
@@ -13,11 +14,11 @@ import java.util.Scanner;
 
 public class ConsoleUI {
     private TaskService taskService;
-    private Scanner scanner;
+    private InputRead input;
 
     public ConsoleUI(TaskService taskService) {
         this.taskService = taskService;
-        this.scanner = new Scanner(System.in);
+        this.input = new InputRead();
     }
 
     public void start() {
@@ -31,7 +32,7 @@ public class ConsoleUI {
             System.out.println("6) Показати всі завдання");
             System.out.println("0) Вихід");
 
-            String choice = scanner.nextLine();
+            String choice = input.readString("Ваш вибір: ");
 
             switch (choice) {
                 case "1":
@@ -62,26 +63,16 @@ public class ConsoleUI {
     }
 
     private void addTask() {
-        String name = readString("Введіть назву завдання: ");
-        Priority priority = getPriority();
-        System.out.println("Введіть дату дедлайну через ' - ' ");
-        LocalDateTime deadLine = null;
-        while (deadLine == null) {
-            try {
-                deadLine = LocalDateTime.parse(scanner.nextLine(), TimeFormatter.FORMATTER);
-            } catch (IllegalArgumentException e) {
-                System.err.println("ПОМИЛКА: " + e.getMessage());
-            } catch (DateTimeParseException e) {
-                System.err.println("ПОМИЛКА: " + e.getMessage());
-            }
-            taskService.add(new Task(0, name, priority, deadLine));
-            System.out.println("Завдання " + name + " успішно додано!");
-        }
+        String name = input.readString("Введіть назву завдання: ");
+        Priority priority = input.readPriority();
+        LocalDateTime deadLine = input.readTime();
+        taskService.add(new Task(0, name, priority, deadLine));
+        System.out.println("Завдання " + name + " успішно додано!");
     }
 
     private void deleteTask() {
         getAllTask();
-        int deleteId = readInt("Введіть ID завдання: ");
+        int deleteId = input.readInt("Введіть ID завдання: ");
         try {
             taskService.delete(deleteId);
             System.out.println("Завдання з ID " + deleteId + " успішно видалено");
@@ -91,7 +82,7 @@ public class ConsoleUI {
     }
 
     private void findTaskById() {
-        int id = readInt("Введіть ID завдання: ");
+        int id = input.readInt("Введіть ID завдання: ");
         try{
             Task byId = taskService.findById(id);
             if(byId != null){
@@ -104,7 +95,7 @@ public class ConsoleUI {
 
     private void updateTask() {
         getAllTask();
-        int updateId = readInt("Введіть ID завдання: ");
+        int updateId = input.readInt("Введіть ID завдання: ");
         try {
             Task update = taskService.update(updateId);
             System.out.println("Завдання змінило статус на " + update.getStatus().getStatusName());
@@ -128,8 +119,10 @@ public class ConsoleUI {
     }
 
     private void getTaskByPriority() {
-        Priority priority = getPriority();
+        Priority priority = input.readPriority();
+
         List<Task> tasksByPriority = taskService.getTasksByPriority(priority);
+
         if (tasksByPriority.isEmpty()) {
             System.out.println("Не має задач з пріоритетом " + priority.getPriority());
         } else {
@@ -142,36 +135,4 @@ public class ConsoleUI {
         }
     }
 
-    private Priority getPriority() {
-        Priority[] priorities = Priority.values();
-        Priority priority = null;
-        do {
-            System.out.println("Виберіть пріоритет: ");
-            for (int i = 0; i < priorities.length; i++) {
-                System.out.println((i + 1) + ". " + priorities[i].getPriority());
-            }
-            int choice = Integer.parseInt(scanner.nextLine());
-            if (choice >= 1 && choice <= priorities.length) {
-                priority = priorities[choice - 1];
-            }
-        } while (priority == null);
-        return priority;
-    }
-
-    private String readString(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine();
-    }
-
-    public int readInt(String prompt) {
-        while (true) {
-            try {
-                System.out.println(prompt);
-                String input = scanner.nextLine();
-                return Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("⚠️ Це не число! Спробуйте ще раз.");
-            }
-        }
-    }
 }
