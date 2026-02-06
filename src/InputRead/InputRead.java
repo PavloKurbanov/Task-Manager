@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class InputRead {
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
     public InputRead() {
         scanner = new Scanner(System.in);
     }
