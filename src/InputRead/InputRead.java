@@ -1,11 +1,10 @@
 package InputRead;
 
-import DataTime.TimeFormatter;
+import DateTime.TimeFormatter;
 import Entities.Priority;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class InputRead {
@@ -53,9 +52,7 @@ public class InputRead {
         while (deadLine == null) {
             try {
                 deadLine = LocalDateTime.parse(scanner.nextLine(), TimeFormatter.FORMATTER);
-            } catch (IllegalArgumentException e) {
-                System.err.println("ПОМИЛКА: " + e.getMessage());
-            } catch (DateTimeParseException e) {
+            } catch (IllegalArgumentException | DateTimeParseException e) {
                 System.err.println("ПОМИЛКА: " + e.getMessage());
             }
         }

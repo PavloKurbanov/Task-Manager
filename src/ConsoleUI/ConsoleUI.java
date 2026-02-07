@@ -1,6 +1,5 @@
 package ConsoleUI;
 
-import DataTime.TimeFormatter;
 import Entities.Priority;
 import Entities.Task;
 import InputRead.InputRead;
@@ -8,9 +7,7 @@ import Service.TaskService;
 import Exception.TasksNotFoundException;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Scanner;
 
 public class ConsoleUI {
     private TaskService taskService;
@@ -54,6 +51,7 @@ public class ConsoleUI {
                     getAllTask();
                     break;
                 case "0":
+                    System.out.println("Дякуємо! На все добре");
                     return;
                 default:
                     System.out.println("Введіть номер з пункту!");
@@ -99,7 +97,7 @@ public class ConsoleUI {
         try {
             Task update = taskService.update(updateId);
             System.out.println("Завдання змінило статус на " + update.getStatus().getStatusName());
-        } catch (TasksNotFoundException e) {
+        } catch (IllegalArgumentException e) {
             System.err.println("ПОМИЛКА: " + e.getMessage());
         }
     }
@@ -131,7 +129,7 @@ public class ConsoleUI {
             } else {
                 System.out.println("Знайдено " + tasksByPriority.size() + " задач з пріоритетом " + priority.getPriority());
             }
-            tasksByPriority.forEach(task -> System.out.println(task));
+            tasksByPriority.forEach(System.out::println);
         }
     }
 

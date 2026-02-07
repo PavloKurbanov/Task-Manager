@@ -1,6 +1,6 @@
 package Entities;
 
-import DataTime.TimeFormatter;
+import DateTime.TimeFormatter;
 
 import java.time.LocalDateTime;
 
