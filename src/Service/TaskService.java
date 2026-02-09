@@ -14,7 +14,11 @@ public interface TaskService {
 
     Task findById(int id);
 
+    Task findByTitle(String title);
+
     List<Task> getAll();
 
     List<Task> getTasksByPriority(Priority priority);
+
+    Task postponeTask(int id);
 }

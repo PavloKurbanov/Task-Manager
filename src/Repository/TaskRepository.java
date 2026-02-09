@@ -8,7 +8,9 @@ import java.util.List;
 public interface TaskRepository {
     Task save(Task task);
 
-    Task getTask(int id);
+    Task getTaskById(int id);
+
+    Task getTaskByTitle(String title);
 
     List<Task> findByPriority(Priority priority);
 

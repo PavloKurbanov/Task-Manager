@@ -10,9 +10,12 @@ public class Task {
     private Status status;
     private final Priority priority;
     private final LocalDateTime dateTime;
-    private final LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     public Task(int id, String title, Priority priority, LocalDateTime deadline) {
+        if (title == null || title.isBlank()){
+            throw new IllegalArgumentException("Введіть назву завдання!");
+        }
         this.id = id;
         this.title = title;
         this.priority = priority;
@@ -53,9 +56,13 @@ public class Task {
         return deadline;
     }
 
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
+
     @Override
     public String toString() {
-        return String.format("ID: %-2d | Назва: %-5s | Пріоритет: %-5s | Статус: %-5s | Дата створення: %-10s | Дедлайн: %-10s ",
+        return String.format("ID: %-2d | Назва: %-5s | Пріоритет: %-5s | Статус:  %-5s | Дата створення: %-10s | Дедлайн: %-10s ",
                 id, title, priority.getPriority(), status.getStatusName(), TimeFormatter.format(dateTime), TimeFormatter.format(deadline));
     }
 }

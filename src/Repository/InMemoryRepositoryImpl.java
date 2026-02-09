@@ -1,14 +1,11 @@
 package Repository;
 
 import Entities.Priority;
-import Entities.Status;
 import Entities.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 import Exception.TasksNotFoundException;
-
-import Exception.TaskListIsEmptyException;
 
 public class InMemoryRepositoryImpl implements TaskRepository {
 
@@ -32,7 +29,17 @@ public class InMemoryRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Task getTask(int id) {
+    public Task getTaskByTitle(String title) {
+        for (Task task : tasks) {
+            if(task.getTitle().equals(title)){
+                return task;
+            }
+        }
+        throw new TasksNotFoundException("Не знайдено завдання з назвою: " + title);
+    }
+
+    @Override
+    public Task getTaskById(int id) {
         for (Task task : tasks) {
             if (task.getId() == id) {
                 return task;
@@ -54,7 +61,7 @@ public class InMemoryRepositoryImpl implements TaskRepository {
 
     @Override
     public void delete(int id) {
-        Task task = getTask(id);
+        Task task = getTaskById(id);
         tasks.remove(task);
     }
 
