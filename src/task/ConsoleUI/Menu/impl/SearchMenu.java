@@ -1,11 +1,11 @@
-package ConsoleUI.Menu;
+package task.ConsoleUI.Menu;
 
-import Entities.Priority;
-import Entities.Status;
-import Entities.Task;
-import IO.InputReader;
-import Service.TaskService;
-import Exception.TasksNotFoundException;
+import task.Entities.Priority;
+import task.Entities.Status;
+import task.Entities.Task;
+import task.IO.InputReader;
+import task.Service.TaskService;
+import task.Exception.TasksNotFoundException;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class SearchMenu {
         try {
             Task byId = taskService.findById(inputId);
             if (byId != null) {
-                System.out.println(inputId);
+                System.out.println(byId);
             }
         } catch (TasksNotFoundException e) {
             System.err.println("ПОМИЛКА: " + e.getMessage());
