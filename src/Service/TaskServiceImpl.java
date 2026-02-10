@@ -18,21 +18,24 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task add(Task task) {
-        if(task != null){
-            return taskRepository.save(task);
+        if (task == null || task.getTitle().isBlank()) {
+            throw new IllegalArgumentException("Введіть коректні дані!");
         }
-        throw new IllegalArgumentException("Введіть коректні дані!");
+        if (task.getDeadline().isBefore(LocalDateTime.now())){
+            throw new IllegalArgumentException("Дата дедлайну не може бути в минулому!");
+        }
+        return taskRepository.save(task);
     }
 
     @Override
     public Task update(int id) {
         Task task = taskRepository.getTaskById(id);
 
-        if(task.getStatus() == Status.DONE){
+        if (task.getStatus() == Status.DONE) {
             throw new IllegalArgumentException("Не можливо оновити завершене завдання!");
         }
 
-        switch(task.getStatus()){
+        switch (task.getStatus()) {
             case NEW -> task.setStatus(Status.IN_PROGRESS);
             case IN_PROGRESS -> task.setStatus(Status.DONE);
             default -> throw new IllegalStateException("Не можливо оновити статус " + task.getStatus().getStatusName());
@@ -46,7 +49,7 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.getTaskById(id);
     }
 
-    public Task findByTitle(String title){
+    public Task findByTitle(String title) {
         return taskRepository.getTaskByTitle(title);
     }
 
