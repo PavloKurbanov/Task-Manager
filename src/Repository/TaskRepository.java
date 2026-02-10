@@ -1,8 +1,10 @@
 package Repository;
 
 import Entities.Priority;
+import Entities.Status;
 import Entities.Task;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TaskRepository {
@@ -14,7 +16,11 @@ public interface TaskRepository {
 
     List<Task> findByPriority(Priority priority);
 
+    List<Task> findByStatus(Status status);
+
     void delete(int id);
 
     List<Task> getAll();
+
+    List<Task> findOverdueTasks(LocalDateTime localDateTime);
 }

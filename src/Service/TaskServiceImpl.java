@@ -5,11 +5,12 @@ import Entities.Status;
 import Entities.Task;
 import Repository.TaskRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TaskServiceImpl implements TaskService {
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     public TaskServiceImpl(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -50,9 +51,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task postponeTask(int id) {
+    public Task postponeTask(int id, long days) {
         Task task = taskRepository.getTaskById(id);
-        task.setDeadline(task.getDeadline().plusDays(1));
+        task.setDeadline(task.getDeadline().plusDays(days));
         return task;
     }
 
@@ -67,7 +68,17 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getOverdueTasks() {
+        return taskRepository.findOverdueTasks(LocalDateTime.now());
+    }
+
+    @Override
     public List<Task> getTasksByPriority(Priority priority) {
         return taskRepository.findByPriority(priority);
+    }
+
+    @Override
+    public List<Task> getTasksByStatus(Status status) {
+        return taskRepository.findByStatus(status);
     }
 }

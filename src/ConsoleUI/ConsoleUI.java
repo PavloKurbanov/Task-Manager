@@ -2,10 +2,10 @@ package ConsoleUI;
 
 import ConsoleUI.Menu.EditMenu;
 import ConsoleUI.Menu.SearchMenu;
-import ConsoleUI.Menu.ShowTaskMenu;
+import ConsoleUI.Menu.DisplayMenu;
 import Entities.Priority;
 import Entities.Task;
-import InputRead.InputRead;
+import IO.InputReader;
 import Service.TaskService;
 import Exception.TasksNotFoundException;
 import java.time.LocalDateTime;
@@ -13,17 +13,17 @@ import java.time.LocalDateTime;
 
 public class ConsoleUI {
     private final TaskService taskService;
-    private final InputRead input;
+    private final InputReader input;
     private final SearchMenu searchMenu;
     private final EditMenu editMenu;
-    private final ShowTaskMenu showTaskMenu;
+    private final DisplayMenu displayMenu;
 
     public ConsoleUI(TaskService taskService) {
         this.taskService = taskService;
-        this.input = new InputRead();
+        this.input = new InputReader();
         this.searchMenu = new SearchMenu(taskService, input);
         this.editMenu = new EditMenu(taskService, input);
-        this.showTaskMenu = new ShowTaskMenu(taskService, input);
+        this.displayMenu = new DisplayMenu(taskService, input);
     }
 
     public void start() {
@@ -46,13 +46,13 @@ public class ConsoleUI {
                     deleteTask();
                     break;
                 case "3":
-                    editMenu.showChangeInTasks();
+                    editMenu.show();
                     break;
                 case "4":
                     searchMenu.show();
                     break;
                 case "5":
-                    showTaskMenu.showTask();
+                    displayMenu.show();
                     break;
                 case "0":
                     System.out.println("\nДякуємо! На все добре");
@@ -77,7 +77,7 @@ public class ConsoleUI {
     }
 
     private void deleteTask() {
-        showTaskMenu.getAllTask();
+        displayMenu.getAllTask();
         int deleteId = input.readInt("Введіть ID завдання: ");
         try {
             taskService.delete(deleteId);

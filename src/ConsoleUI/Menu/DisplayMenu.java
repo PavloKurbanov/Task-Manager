@@ -1,21 +1,21 @@
 package ConsoleUI.Menu;
 
 import Entities.Task;
-import InputRead.InputRead;
+import IO.InputReader;
 import Service.TaskService;
 
 import java.util.List;
 
-public class ShowTaskMenu {
+public class DisplayMenu {
     private final TaskService taskService;
-    private final InputRead input;
+    private final InputReader input;
 
-    public ShowTaskMenu(TaskService taskService, InputRead input) {
+    public DisplayMenu(TaskService taskService, InputReader input) {
         this.taskService = taskService;
         this.input = input;
     }
 
-    public void showTask() {
+    public void show() {
         while (true) {
             System.out.println("1) Список всіх завдань");
             System.out.println("2) Список всіх протермінованих завдань");
@@ -28,6 +28,7 @@ public class ShowTaskMenu {
                     getAllTask();
                     break;
                 case "2":
+                    getAllOverdueTasks();
                     break;
                 case "0":
                     return;
@@ -38,16 +39,31 @@ public class ShowTaskMenu {
     }
 
     public void getAllTask(){
-        System.out.println("Список завдань: ");
-
         List<Task> allTasks = taskService.getAll();
 
         if (allTasks.isEmpty()) {
             System.out.println("Список порожній!");
         }
 
+        System.out.println("Список завдань: ");
+
         for (Task task : allTasks) {
             System.out.println(task);
         }
+    }
+
+    public void getAllOverdueTasks(){
+        List<Task> allOverdueTasks = taskService.getOverdueTasks();
+
+        if(allOverdueTasks.isEmpty()){
+            System.out.println("Не має протермінованих завдань: ");
+        }
+
+        System.out.println("Список протермінованих завданнь " + allOverdueTasks.size() + " :");
+
+        for (Task allOverdueTask : allOverdueTasks) {
+            System.out.println(allOverdueTask);
+        }
+
     }
 }

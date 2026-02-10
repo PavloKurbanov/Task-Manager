@@ -1,8 +1,10 @@
 package Service;
 
 import Entities.Priority;
+import Entities.Status;
 import Entities.Task;
 
+import java.sql.Statement;
 import java.util.List;
 
 public interface TaskService {
@@ -20,5 +22,9 @@ public interface TaskService {
 
     List<Task> getTasksByPriority(Priority priority);
 
-    Task postponeTask(int id);
+    List<Task> getTasksByStatus(Status status);
+
+    Task postponeTask(int id, long days);
+
+    List<Task> getOverdueTasks();
 }

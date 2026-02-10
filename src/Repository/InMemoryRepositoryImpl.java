@@ -1,8 +1,10 @@
 package Repository;
 
 import Entities.Priority;
+import Entities.Status;
 import Entities.Task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import Exception.TasksNotFoundException;
@@ -49,6 +51,17 @@ public class InMemoryRepositoryImpl implements TaskRepository {
     }
 
     @Override
+    public List<Task> findByStatus(Status status) {
+        List<Task> statusTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if(task.getStatus() == status){
+                statusTasks.add(task);
+            }
+        }
+        return statusTasks;
+    }
+
+    @Override
     public List<Task> findByPriority(Priority priority) {
         List<Task> result = new ArrayList<>();
         for (Task task : tasks) {
@@ -63,6 +76,17 @@ public class InMemoryRepositoryImpl implements TaskRepository {
     public void delete(int id) {
         Task task = getTaskById(id);
         tasks.remove(task);
+    }
+
+    @Override
+    public List<Task> findOverdueTasks(LocalDateTime localDateTime) {
+        List<Task> overdueTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if(task.getDeadline().isBefore(localDateTime)){
+                overdueTasks.add(task);
+            }
+        }
+        return overdueTasks;
     }
 
     @Override
