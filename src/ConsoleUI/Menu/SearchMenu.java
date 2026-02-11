@@ -54,7 +54,7 @@ public class SearchMenu {
         try {
             Task byId = taskService.findById(inputId);
             if (byId != null) {
-                System.out.println(inputId);
+                System.out.println(byId);
             }
         } catch (TasksNotFoundException e) {
             System.err.println("ПОМИЛКА: " + e.getMessage());
