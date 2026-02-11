@@ -1,13 +1,9 @@
-package task.ConsoleUI.Menu;
+package ConsoleUI.Menu;
 
-import task.Exception.TasksNotFoundException;
-import task.DateTime.TimeFormatter;
-import task.Entities.Priority;
-import task.Entities.Task;
-import task.IO.InputReader;
-import task.Service.TaskService;
-
-import java.time.LocalDateTime;
+import DateTime.TimeFormatter;
+import Entities.Task;
+import IO.InputReader;
+import Service.TaskService;
 
 public class EditMenu {
     private final TaskService taskService;
@@ -58,33 +54,11 @@ public class EditMenu {
         int taskId = input.readInt("Введіть ID завдання: ");
         Long daysToAdd = input.readLong("Введіть кількість днів: ");
         try {
+
             Task task = taskService.postponeTask(taskId, daysToAdd);
             System.out.println("Дата дедлайну змінена на " + TimeFormatter.format(task.getDeadline()));
         } catch (IllegalArgumentException e) {
             System.err.println("Щось пішло не так!");
-        }
-    }
-
-    public void addTask() {
-        try {
-            String name = input.readString("Введіть назву завдання: ");
-            Priority priority = input.readPriority();
-            LocalDateTime deadLine = input.readTime();
-            taskService.add(new Task(0, name, priority, deadLine));
-            System.out.println("Завдання " + name + " успішно додано!");
-        } catch (IllegalArgumentException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
-        }
-    }
-
-    public void deleteTask() {
-        displayMenu.getAllTask();
-        int deleteId = input.readInt("Введіть ID завдання: ");
-        try {
-            taskService.delete(deleteId);
-            System.out.println("Завдання з ID " + deleteId + " успішно видалено");
-        } catch (TasksNotFoundException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
         }
     }
 }
