@@ -6,12 +6,10 @@ import IO.InputReader;
 import Service.TaskService;
 
 public class EditMenu {
-    private final TaskService taskService;
     private final InputReader input;
     private final DisplayMenu displayMenu;
 
     public EditMenu(TaskService taskService, InputReader input) {
-        this.taskService = taskService;
         this.input = input;
         this.displayMenu = new DisplayMenu(taskService, input);
     }
