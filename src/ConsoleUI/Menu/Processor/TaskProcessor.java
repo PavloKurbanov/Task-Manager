@@ -1,4 +1,4 @@
-package TaskProcessor;
+package ConsoleUI.Menu.Processor;
 
 public interface TaskProcessor {
     // Яку роботу виконуємо (додаємо, видаляємо...)

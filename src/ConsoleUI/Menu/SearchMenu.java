@@ -50,44 +50,15 @@ public class SearchMenu {
     }
 
     private void findById() {
-        int inputId = input.readInt("Введіть ID завдання: ");
-        try {
-            Task byId = taskService.findById(inputId);
-            if (byId != null) {
-                System.out.println(inputId);
-            }
-        } catch (TasksNotFoundException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
-        }
+
     }
 
     private void findByTitle() {
-        String readString = input.readString("Введінь назву завдання");
-        try {
-            Task byTitle = taskService.findByTitle(readString);
-            if (byTitle != null) {
-                System.out.println(byTitle);
-            }
-        } catch (TasksNotFoundException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
-        }
+
     }
 
     private void findByPriority(){
-        Priority priority = input.readPriority();
 
-        List<Task> tasksByPriority = taskService.getTasksByPriority(priority);
-
-        if (tasksByPriority.isEmpty()) {
-            System.out.println("Не має задач з пріоритетом " + priority.getPriority());
-        } else {
-            if (tasksByPriority.size() % 2 == 0) {
-                System.out.println("Знайдено " + tasksByPriority.size() + " задачі з пріоритетом " + priority.getPriority());
-            } else {
-                System.out.println("Знайдено " + tasksByPriority.size() + " задач з пріоритетом " + priority.getPriority());
-            }
-            tasksByPriority.forEach(System.out::println);
-        }
     }
 
     private void findByStatus(){

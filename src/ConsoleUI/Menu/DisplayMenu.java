@@ -64,6 +64,5 @@ public class DisplayMenu {
         for (Task allOverdueTask : allOverdueTasks) {
             System.out.println(allOverdueTask);
         }
-
     }
 }

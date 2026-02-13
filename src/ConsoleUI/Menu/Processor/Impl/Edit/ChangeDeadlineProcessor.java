@@ -1,10 +1,10 @@
-package TaskProcessor.TaskProcessorImpl;
+package ConsoleUI.Menu.Processor.Impl.Edit;
 
 import ConsoleUI.Menu.DisplayMenu;
 import DateTime.TimeFormatter;
 import Entities.Task;
 import Service.TaskService;
-import TaskProcessor.TaskProcessor;
+import ConsoleUI.Menu.Processor.TaskProcessor;
 import IO.InputReader;
 
 

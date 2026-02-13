@@ -1,17 +1,23 @@
 package ConsoleUI.Menu;
 
+import ConsoleUI.Menu.Processor.TaskProcessor;
 import DateTime.TimeFormatter;
 import Entities.Task;
 import IO.InputReader;
 import Service.TaskService;
 
+import java.util.Map;
+
 public class EditMenu {
     private final InputReader input;
     private final DisplayMenu displayMenu;
+    private final Map<String, TaskProcessor> mapBuilderEditMenu;
 
     public EditMenu(TaskService taskService, InputReader input) {
         this.input = input;
         this.displayMenu = new DisplayMenu(taskService, input);
+        MapBuilderEditMenu mapBuilderEditMenu = new MapBuilderEditMenu(taskService, input);
+        this.mapBuilderEditMenu = mapBuilderEditMenu.buildEditMenu();
     }
 
     public void show() {
@@ -21,42 +27,17 @@ public class EditMenu {
             System.out.println("0) Повернутись в меню");
 
             String choice = input.readString("Ваш вибір: ");
-            switch (choice) {
-                case "1":
-                    changeStatus();
-                    break;
-                case "2":
-                    changeDeadline();
-                    break;
-                case "0":
-                    return;
-                default:
-                    System.out.println("ВВведіть номер з пунтку, або натисніть 0 для вихаду в меню");
+
+            if(choice.equals("0")) {
+                System.out.println("Дякуємо! На все добре");
+            } else {
+                TaskProcessor processor = mapBuilderEditMenu.get(choice);
+                if(processor != null) {
+                    processor.process();
+                } else {
+                    System.out.println("Введіть пункт з меню!");
+                }
             }
-        }
-    }
-
-    private void changeStatus(){
-        displayMenu.getAllTask();
-        int updateId = input.readInt("Введіть ID завдання: ");
-        try {
-            Task update = taskService.update(updateId);
-            System.out.println("Завдання змінило статус на [" + update.getStatus().getStatusName() + "]");
-        } catch (IllegalArgumentException e) {
-            System.err.println("ПОМИЛКА: " + e.getMessage());
-        }
-    }
-
-    private void changeDeadline(){
-        displayMenu.getAllTask();
-        int taskId = input.readInt("Введіть ID завдання: ");
-        Long daysToAdd = input.readLong("Введіть кількість днів: ");
-        try {
-
-            Task task = taskService.postponeTask(taskId, daysToAdd);
-            System.out.println("Дата дедлайну змінена на " + TimeFormatter.format(task.getDeadline()));
-        } catch (IllegalArgumentException e) {
-            System.err.println("Щось пішло не так!");
         }
     }
 }

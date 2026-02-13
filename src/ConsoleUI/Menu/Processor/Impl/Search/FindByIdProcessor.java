@@ -1,0 +1,34 @@
+package ConsoleUI.Menu.Processor.Impl.Search;
+
+import Entities.Task;
+import IO.InputReader;
+import Service.TaskService;
+import ConsoleUI.Menu.Processor.TaskProcessor;
+import Exception.TasksNotFoundException;
+
+public class FindByIdProcessor implements TaskProcessor {
+    private final TaskService taskService;
+    private final InputReader input;
+
+    public FindByIdProcessor(TaskService taskService, InputReader inputReader) {
+        this.taskService = taskService;
+        this.input = inputReader;
+    }
+    @Override
+    public String choice() {
+        return "1";
+    }
+
+    @Override
+    public void process() {
+        int inputId = input.readInt("Введіть ID завдання: ");
+        try {
+            Task byId = taskService.findById(inputId);
+            if (byId != null) {
+                System.out.println(inputId);
+            }
+        } catch (TasksNotFoundException e) {
+            System.err.println("ПОМИЛКА: " + e.getMessage());
+        }
+    }
+}

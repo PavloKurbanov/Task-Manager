@@ -1,9 +1,9 @@
-package TaskProcessor.TaskProcessorImpl;
+package ConsoleUI.Menu.Processor.Impl.Edit;
 
 import ConsoleUI.Menu.DisplayMenu;
 import Entities.Task;
 import Service.TaskService;
-import TaskProcessor.TaskProcessor;
+import ConsoleUI.Menu.Processor.TaskProcessor;
 import IO.InputReader;
 
 public class ChangeStatusProcessor implements TaskProcessor {

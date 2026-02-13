@@ -1,10 +1,10 @@
-package TaskProcessor.TaskProcessorImpl;
+package ConsoleUI.Menu.Processor.Impl;
 
 import Entities.Priority;
 import Entities.Task;
 import Service.TaskService;
 import IO.InputReader;
-import TaskProcessor.TaskProcessor;
+import ConsoleUI.Menu.Processor.TaskProcessor;
 
 import java.time.LocalDateTime;
 
