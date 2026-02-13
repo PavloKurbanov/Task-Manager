@@ -1,0 +1,95 @@
+Для вивожу інформації
+public class ListPrinter {
+
+    public <T> void print(List<T> items) {
+
+        if (items == null || items.isEmpty()) {
+            System.out.println("Список порожній!");
+            return;
+        }
+
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println((i + 1) + ") " + items.get(i));
+        }
+    }
+}
+
+Для інпутів
+public <T> T readValue(String prompt, Function<String, T> parser) {
+    while (true) {
+        try {
+            System.out.print(prompt);
+            String input = scanner.nextLine();
+            return parser.apply(input);
+        } catch (Exception e) {
+            System.out.println("⚠️ Невірний ввід. Спробуйте ще раз.");
+        }
+    }
+}
+
+Для Enum
+public <T extends Enum<T>> T readEnum(Class<T> enumClass, String label) {
+
+    T[] values = enumClass.getEnumConstants();
+
+    while (true) {
+        try {
+            System.out.println("\nОберіть " + label + ":");
+
+            for (int i = 0; i < values.length; i++) {
+                System.out.println((i + 1) + ". " + values[i]);
+            }
+
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            if (choice >= 1 && choice <= values.length) {
+                return values[choice - 1];
+            }
+
+        } catch (Exception ignored) {}
+
+        System.out.println("⚠️ Невірний вибір. Спробуйте ще раз.");
+    }
+}
+
+                 ┌─────────────────────────────┐
+                 │  Є метод або клас з кодом  │
+                 └─────────────┬──────────────┘
+                               │
+                               ▼
+                 ┌─────────────────────────────┐
+                 │  Цей код повторюється для │
+                 │  різних типів даних?      │
+                 └─────────────┬──────────────┘
+                   Так         │          Ні
+                               ▼
+               ┌─────────────────────────────┐
+               │   Залишаємо конкретний код │
+               └─────────────────────────────┘
+
+
+  Так
+   │
+   ▼
+┌───────────────────────────┐
+│  Який “тип-параметр” T?  │
+│  (int, long, LocalDateTime│
+│   Task, Priority...)       │
+└─────────────┬─────────────┘
+              ▼
+┌───────────────────────────┐
+│  Можна зробити метод      │
+│  generic: <T> T read(...)?│
+└─────────────┬─────────────┘
+              ▼
+┌───────────────────────────┐
+│  Якщо потрібна конвертація│
+│  з рядка → T: використати │
+│  Function<String, T>       │
+└─────────────┬─────────────┘
+              ▼
+┌───────────────────────────┐
+│  Тестуємо з різними типами│
+│  (Integer, LocalDateTime, │
+│   Task...)                 │
+└───────────────────────────┘
