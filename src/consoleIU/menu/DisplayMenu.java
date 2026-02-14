@@ -8,12 +8,10 @@ import service.TaskService;
 import java.util.Map;
 
 public class DisplayMenu {
-    private final TaskService taskService;
     private final InputReader input;
     private final Map<String, TaskProcessor> displayMenu;
 
     public DisplayMenu(TaskService taskService, InputReader input) {
-        this.taskService = taskService;
         this.input = input;
         MapBuilderDisplayMenu mapBuilderDisplayMenu = new MapBuilderDisplayMenu(taskService, input);
         this.displayMenu = mapBuilderDisplayMenu.displayMenu();

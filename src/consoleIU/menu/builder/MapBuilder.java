@@ -24,12 +24,12 @@ public class MapBuilder {
     public Map<String, TaskProcessor> buildMenu() {
         Map<String, TaskProcessor> map = new HashMap<>();
 
-
         TaskProcessor add = new AddProcessor(taskService, input);
         TaskProcessor delete = new DeleteProcessor(taskService, input);
         TaskProcessor edit = new OpenEditMenuProcessor(taskService, input);
         TaskProcessor search = new OpenSearchMenuProcessor(taskService, input);
         TaskProcessor display = new OpenDisplayMenuProcessor(taskService, input);
+
         map.put(add.choice(), add);
         map.put(delete.choice(), delete);
         map.put(edit.choice(), edit);

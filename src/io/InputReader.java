@@ -35,6 +35,7 @@ public class InputReader {
     public Priority readPriority() {
         Priority[] priorities = Priority.values();
         Priority priority = null;
+
         do {
             System.out.println("\nОберіть пріоритет: ");
             for (int i = 0; i < priorities.length; i++) {
@@ -45,6 +46,7 @@ public class InputReader {
                 priority = priorities[choice - 1];
             }
         } while (priority == null);
+
         return priority;
     }
 
@@ -62,12 +64,14 @@ public class InputReader {
                 status = statuses[choice - 1];
             }
         } while (status == null);
+
         return status;
     }
 
     public LocalDateTime readTime() {
         System.out.println("Введіть дату дедлайну через ' - ' ");
         LocalDateTime deadLine = null;
+
         while (deadLine == null) {
             try {
                 deadLine = LocalDateTime.parse(scanner.nextLine(), TimeFormatter.FORMATTER);
@@ -75,6 +79,7 @@ public class InputReader {
                 System.err.println("ПОМИЛКА: " + e.getMessage());
             }
         }
+
         return deadLine;
     }
 
@@ -89,25 +94,4 @@ public class InputReader {
             }
         }
     }
-   /* public <T extends Enum<T>> T readEnum(Class<T> EnumClass, String lable) {
-        T[] enums = EnumClass.getEnumConstants();
-
-        while (true) {
-            try {
-                System.out.println("Оберіть " + lable + ":");
-
-                for (int i = 0; i < enums.length; i++) {
-                    System.out.println((i + 1) + ". " + enums[i]);
-                }
-
-                int choice = Integer.parseInt(scanner.nextLine());
-
-                if (choice >= 1 && choice < -enums.length) {
-                    return enums[choice - 1];
-                }
-            } catch (IllegalArgumentException e) {
-            }
-            System.out.println("⚠️ Невірний вибір. Спробуйте ще раз.");
-        }
-    }*/
 }

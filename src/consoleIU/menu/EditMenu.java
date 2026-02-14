@@ -9,12 +9,10 @@ import java.util.Map;
 
 public class EditMenu {
     private final InputReader input;
-    private final DisplayMenu displayMenu;
     private final Map<String, TaskProcessor> mapBuilderEditMenu;
 
     public EditMenu(TaskService taskService, InputReader input) {
         this.input = input;
-        this.displayMenu = new DisplayMenu(taskService, input);
         MapBuilderEditMenu mapBuilderEditMenu = new MapBuilderEditMenu(taskService, input);
         this.mapBuilderEditMenu = mapBuilderEditMenu.buildEditMenu();
     }

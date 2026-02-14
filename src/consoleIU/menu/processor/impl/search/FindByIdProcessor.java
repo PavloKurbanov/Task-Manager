@@ -14,6 +14,7 @@ public class FindByIdProcessor implements TaskProcessor {
         this.taskService = taskService;
         this.input = inputReader;
     }
+
     @Override
     public String choice() {
         return "1";

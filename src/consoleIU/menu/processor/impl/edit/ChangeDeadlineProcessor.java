@@ -16,7 +16,7 @@ public class ChangeDeadlineProcessor implements TaskProcessor {
     public ChangeDeadlineProcessor(TaskService taskService, InputReader input){
         this.taskService = taskService;
         this.input = input;
-        this.getAllTasksProcessor = new GetAllTasksProcessor(taskService, input);
+        this.getAllTasksProcessor = new GetAllTasksProcessor(taskService);
     }
 
     @Override
@@ -30,7 +30,6 @@ public class ChangeDeadlineProcessor implements TaskProcessor {
         int taskId = input.readInt("Введіть ID завдання: ");
         Long daysToAdd = input.readLong("Введіть кількість днів: ");
         try {
-
             Task task = taskService.postponeTask(taskId, daysToAdd);
             System.out.println("Дата дедлайну змінена на " + TimeFormatter.format(task.getDeadline()));
         } catch (IllegalArgumentException e) {

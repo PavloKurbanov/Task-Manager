@@ -9,11 +9,9 @@ import java.util.List;
 
 public class GetAllOverdueTasksProcessor implements TaskProcessor {
     private final TaskService taskService;
-    private final InputReader inputReader;
 
-    public GetAllOverdueTasksProcessor(TaskService taskService, InputReader inputReader) {
+    public GetAllOverdueTasksProcessor(TaskService taskService) {
         this.taskService = taskService;
-        this.inputReader = inputReader;
     }
 
     @Override

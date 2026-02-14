@@ -14,7 +14,7 @@ public class ChangeStatusProcessor implements TaskProcessor {
     public ChangeStatusProcessor(TaskService taskService, InputReader input){
         this.taskService = taskService;
         this.input = input;
-        this.getAllTasksProcessor = new GetAllTasksProcessor(taskService, input);
+        this.getAllTasksProcessor = new GetAllTasksProcessor(taskService);
     }
 
     @Override

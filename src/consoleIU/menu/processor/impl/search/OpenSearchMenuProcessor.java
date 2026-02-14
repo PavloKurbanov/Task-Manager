@@ -6,7 +6,7 @@ import service.TaskService;
 import io.InputReader;
 
 public class OpenSearchMenuProcessor implements TaskProcessor {
-    private SearchMenu searchMenu;
+    private final SearchMenu searchMenu;
 
     public OpenSearchMenuProcessor(TaskService taskService, InputReader input){
         this.searchMenu = new SearchMenu(taskService, input);

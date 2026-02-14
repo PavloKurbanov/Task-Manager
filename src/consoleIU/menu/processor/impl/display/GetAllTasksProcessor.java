@@ -9,11 +9,9 @@ import java.util.List;
 
 public class GetAllTasksProcessor implements TaskProcessor {
     private final TaskService taskService;
-    private final InputReader input;
 
-    public GetAllTasksProcessor(TaskService taskService, InputReader input) {
+    public GetAllTasksProcessor(TaskService taskService) {
         this.taskService = taskService;
-        this.input = input;
     }
 
     @Override

@@ -27,7 +27,6 @@ public class MapBuilderEditMenu {
         map.put(changeStatus.choice(), changeStatus);
         map.put(changeDeadline.choice(), changeDeadline);
 
-
         return map;
     }
 }

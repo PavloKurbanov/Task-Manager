@@ -10,7 +10,6 @@ import java.util.List;
 import exception.TasksNotFoundException;
 
 public class InMemoryRepositoryImpl implements TaskRepository {
-
     List<Task> tasks;
     private int id = 1;
 
