@@ -1,11 +1,11 @@
 package ConsoleUI.Menu.Processor.Impl.Edit;
 
 import ConsoleUI.Menu.DisplayMenu;
-import DateTime.TimeFormatter;
-import Entities.Task;
+import datetime.TimeFormatter;
+import entity.Task;
 import Service.TaskService;
 import ConsoleUI.Menu.Processor.TaskProcessor;
-import IO.InputReader;
+import io.InputReader;
 
 
 public class ChangeDeadlineProcessor implements TaskProcessor {

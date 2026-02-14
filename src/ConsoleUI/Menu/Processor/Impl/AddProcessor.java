@@ -1,9 +1,9 @@
 package ConsoleUI.Menu.Processor.Impl;
 
-import Entities.Priority;
-import Entities.Task;
+import entity.Priority;
+import entity.Task;
 import Service.TaskService;
-import IO.InputReader;
+import io.InputReader;
 import ConsoleUI.Menu.Processor.TaskProcessor;
 
 import java.time.LocalDateTime;

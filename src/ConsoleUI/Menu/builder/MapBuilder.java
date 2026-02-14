@@ -1,9 +1,9 @@
-package ConsoleUI.Menu;
+package ConsoleUI.Menu.builder;
 
-import ConsoleUI.Menu.Processor.Impl.Edit.MapBuilderEditProcessor;
-import ConsoleUI.Menu.Processor.Impl.Search.MapBuilderSearchProcessor;
+import ConsoleUI.Menu.Processor.Impl.Edit.OpenEditMenuProcessor;
+import ConsoleUI.Menu.Processor.Impl.Search.OpenSearchMenuProcessor;
 import Service.TaskService;
-import IO.InputReader;
+import io.InputReader;
 import ConsoleUI.Menu.Processor.TaskProcessor;
 import ConsoleUI.Menu.Processor.Impl.AddProcessor;
 import ConsoleUI.Menu.Processor.Impl.DeleteProcessor;
@@ -26,8 +26,8 @@ public class MapBuilder {
 
         TaskProcessor add = new AddProcessor(taskService, input);
         TaskProcessor delete = new DeleteProcessor(taskService, input);
-        TaskProcessor edit = new MapBuilderEditProcessor(taskService, input);
-        TaskProcessor search = new MapBuilderSearchProcessor(taskService, input);
+        TaskProcessor edit = new OpenEditMenuProcessor(taskService, input);
+        TaskProcessor search = new OpenSearchMenuProcessor(taskService, input);
         map.put(add.choice(), add);
         map.put(delete.choice(), delete);
         map.put(edit.choice(), edit);

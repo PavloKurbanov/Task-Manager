@@ -21,7 +21,7 @@ public <T> T readValue(String prompt, Function<String, T> parser) {
             System.out.print(prompt);
             String input = scanner.nextLine();
             return parser.apply(input);
-        } catch (Exception e) {
+        } catch (exception e) {
             System.out.println("⚠️ Невірний ввід. Спробуйте ще раз.");
         }
     }
@@ -46,7 +46,7 @@ public <T extends Enum<T>> T readEnum(Class<T> enumClass, String label) {
                 return values[choice - 1];
             }
 
-        } catch (Exception ignored) {}
+        } catch (exception ignored) {}
 
         System.out.println("⚠️ Невірний вибір. Спробуйте ще раз.");
     }

@@ -1,10 +1,10 @@
 package ConsoleUI.Menu.Processor.Impl.Edit;
 
 import ConsoleUI.Menu.DisplayMenu;
-import Entities.Task;
+import entity.Task;
 import Service.TaskService;
 import ConsoleUI.Menu.Processor.TaskProcessor;
-import IO.InputReader;
+import io.InputReader;
 
 public class ChangeStatusProcessor implements TaskProcessor {
     private final TaskService taskService;

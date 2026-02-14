@@ -1,7 +1,7 @@
 package ConsoleUI;
 
-import ConsoleUI.Menu.MapBuilder;
-import IO.InputReader;
+import ConsoleUI.Menu.builder.MapBuilder;
+import io.InputReader;
 import Service.TaskService;
 import ConsoleUI.Menu.Processor.TaskProcessor;
 

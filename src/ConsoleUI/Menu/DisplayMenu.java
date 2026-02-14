@@ -1,7 +1,7 @@
 package ConsoleUI.Menu;
 
-import Entities.Task;
-import IO.InputReader;
+import entity.Task;
+import io.InputReader;
 import Service.TaskService;
 
 import java.util.List;

@@ -1,7 +1,8 @@
-package ConsoleUI.Menu.Processor.Impl.Search;
+package ConsoleUI.Menu;
 
+import ConsoleUI.Menu.builder.MapBuilderSearch;
 import ConsoleUI.Menu.Processor.TaskProcessor;
-import IO.InputReader;
+import io.InputReader;
 import Service.TaskService;
 
 import java.util.Map;

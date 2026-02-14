@@ -1,8 +1,12 @@
-package ConsoleUI.Menu.Processor.Impl.Search;
+package ConsoleUI.Menu.builder;
 
+import ConsoleUI.Menu.Processor.Impl.Search.FindByIdProcessor;
+import ConsoleUI.Menu.Processor.Impl.Search.FindByPriorityProcessor;
+import ConsoleUI.Menu.Processor.Impl.Search.FindByStatusProcessor;
+import ConsoleUI.Menu.Processor.Impl.Search.FindByTitleProcessor;
 import ConsoleUI.Menu.Processor.TaskProcessor;
 import Service.TaskService;
-import IO.InputReader;
+import io.InputReader;
 
 import java.util.HashMap;
 import java.util.Map;

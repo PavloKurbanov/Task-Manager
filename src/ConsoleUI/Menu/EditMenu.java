@@ -1,8 +1,8 @@
-package ConsoleUI.Menu.Processor.Impl.Edit;
+package ConsoleUI.Menu;
 
-import ConsoleUI.Menu.DisplayMenu;
+import ConsoleUI.Menu.builder.MapBuilderEditMenu;
 import ConsoleUI.Menu.Processor.TaskProcessor;
-import IO.InputReader;
+import io.InputReader;
 import Service.TaskService;
 
 import java.util.Map;

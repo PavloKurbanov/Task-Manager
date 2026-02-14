@@ -1,8 +1,8 @@
 package Repository;
 
-import Entities.Priority;
-import Entities.Status;
-import Entities.Task;
+import entity.Priority;
+import entity.Status;
+import entity.Task;
 
 import java.time.LocalDateTime;
 import java.util.List;

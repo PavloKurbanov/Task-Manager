@@ -1,10 +1,10 @@
 package ConsoleUI.Menu.Processor.Impl.Search;
 
-import Entities.Task;
-import IO.InputReader;
+import entity.Task;
+import io.InputReader;
 import Service.TaskService;
 import ConsoleUI.Menu.Processor.TaskProcessor;
-import Exception.TasksNotFoundException;
+import exception.TasksNotFoundException;
 
 public class FindByIdProcessor implements TaskProcessor {
     private final TaskService taskService;

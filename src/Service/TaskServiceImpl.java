@@ -1,8 +1,8 @@
 package Service;
 
-import Entities.Priority;
-import Entities.Status;
-import Entities.Task;
+import entity.Priority;
+import entity.Status;
+import entity.Task;
 import Repository.TaskRepository;
 
 import java.time.LocalDateTime;

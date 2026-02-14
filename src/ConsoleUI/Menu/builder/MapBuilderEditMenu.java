@@ -1,7 +1,9 @@
-package ConsoleUI.Menu.Processor.Impl.Edit;
+package ConsoleUI.Menu.builder;
 
+import ConsoleUI.Menu.Processor.Impl.Edit.ChangeDeadlineProcessor;
+import ConsoleUI.Menu.Processor.Impl.Edit.ChangeStatusProcessor;
 import ConsoleUI.Menu.Processor.TaskProcessor;
-import IO.InputReader;
+import io.InputReader;
 import Service.TaskService;
 
 import java.util.HashMap;

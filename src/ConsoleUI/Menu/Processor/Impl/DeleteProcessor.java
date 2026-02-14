@@ -2,8 +2,8 @@ package ConsoleUI.Menu.Processor.Impl;
 
 import ConsoleUI.Menu.DisplayMenu;
 import Service.TaskService;
-import IO.InputReader;
-import Exception.TasksNotFoundException;
+import io.InputReader;
+import exception.TasksNotFoundException;
 import ConsoleUI.Menu.Processor.TaskProcessor;
 
 public class DeleteProcessor implements TaskProcessor {

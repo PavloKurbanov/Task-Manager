@@ -1,10 +1,9 @@
 package Service;
 
-import Entities.Priority;
-import Entities.Status;
-import Entities.Task;
+import entity.Priority;
+import entity.Status;
+import entity.Task;
 
-import java.sql.Statement;
 import java.util.List;
 
 public interface TaskService {

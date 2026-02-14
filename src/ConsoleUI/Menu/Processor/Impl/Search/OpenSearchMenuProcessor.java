@@ -1,14 +1,15 @@
 package ConsoleUI.Menu.Processor.Impl.Search;
 
 import ConsoleUI.Menu.Processor.TaskProcessor;
+import ConsoleUI.Menu.SearchMenu;
 import Service.TaskService;
-import IO.InputReader;
+import io.InputReader;
 
-public class MapBuilderSearchProcessor implements TaskProcessor {
+public class OpenSearchMenuProcessor implements TaskProcessor {
     private final TaskService taskService;
     private final InputReader input;
 
-    public MapBuilderSearchProcessor(TaskService taskService, InputReader input){
+    public OpenSearchMenuProcessor(TaskService taskService, InputReader input){
         this.taskService = taskService;
         this.input = input;
     }

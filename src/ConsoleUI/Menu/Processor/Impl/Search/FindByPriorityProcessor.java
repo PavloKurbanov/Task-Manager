@@ -1,8 +1,8 @@
 package ConsoleUI.Menu.Processor.Impl.Search;
 
-import Entities.Priority;
-import Entities.Task;
-import IO.InputReader;
+import entity.Priority;
+import entity.Task;
+import io.InputReader;
 import Service.TaskService;
 import ConsoleUI.Menu.Processor.TaskProcessor;
 

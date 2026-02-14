@@ -1,4 +1,4 @@
-package Exception;
+package exception;
 
 public class TaskListIsEmptyException extends RuntimeException {
     public TaskListIsEmptyException(String message) {
