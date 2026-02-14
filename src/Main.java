@@ -1,8 +1,8 @@
-import ConsoleUI.ConsoleUI;
-import Repository.InMemoryRepositoryImpl;
-import Repository.TaskRepository;
-import Service.TaskService;
-import Service.TaskServiceImpl;
+import consoleIU.ConsoleUI;
+import repository.InMemoryRepositoryImpl;
+import repository.TaskRepository;
+import service.TaskService;
+import service.TaskServiceImpl;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
