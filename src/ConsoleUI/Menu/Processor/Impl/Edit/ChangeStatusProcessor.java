@@ -1,6 +1,7 @@
 package ConsoleUI.Menu.Processor.Impl.Edit;
 
 import ConsoleUI.Menu.DisplayMenu;
+import ConsoleUI.Menu.Processor.Impl.Display.GetAllTasksProcessor;
 import entity.Task;
 import Service.TaskService;
 import ConsoleUI.Menu.Processor.TaskProcessor;
@@ -9,17 +10,17 @@ import io.InputReader;
 public class ChangeStatusProcessor implements TaskProcessor {
     private final TaskService taskService;
     private final InputReader input;
-    private final DisplayMenu displayMenu;
+    private final GetAllTasksProcessor getAllTasksProcessor;
 
     public ChangeStatusProcessor(TaskService taskService, InputReader input){
         this.taskService = taskService;
         this.input = input;
-        this.displayMenu = new DisplayMenu(taskService, input);
+        this.getAllTasksProcessor = new GetAllTasksProcessor(taskService, input);
     }
 
     @Override
     public void process() {
-        displayMenu.getAllTask();
+        getAllTasksProcessor.process();
         int updateId = input.readInt("Введіть ID завдання: ");
         try {
             Task update = taskService.update(updateId);

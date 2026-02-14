@@ -1,6 +1,7 @@
 package ConsoleUI.Menu.Processor.Impl.Edit;
 
 import ConsoleUI.Menu.DisplayMenu;
+import ConsoleUI.Menu.Processor.Impl.Display.GetAllTasksProcessor;
 import datetime.TimeFormatter;
 import entity.Task;
 import Service.TaskService;
@@ -11,12 +12,12 @@ import io.InputReader;
 public class ChangeDeadlineProcessor implements TaskProcessor {
     private final TaskService taskService;
     private final InputReader input;
-    private final DisplayMenu displayMenu;
+    private final GetAllTasksProcessor getAllTasksProcessor;
 
     public ChangeDeadlineProcessor(TaskService taskService, InputReader input){
         this.taskService = taskService;
         this.input = input;
-        this.displayMenu = new DisplayMenu(taskService, input);
+        this.getAllTasksProcessor = new GetAllTasksProcessor(taskService, input);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class ChangeDeadlineProcessor implements TaskProcessor {
 
     @Override
     public void process() {
-        displayMenu.getAllTask();
+        getAllTasksProcessor.process();
         int taskId = input.readInt("Введіть ID завдання: ");
         Long daysToAdd = input.readLong("Введіть кількість днів: ");
         try {

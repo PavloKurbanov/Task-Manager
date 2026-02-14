@@ -1,18 +1,24 @@
 package ConsoleUI.Menu;
 
+import ConsoleUI.Menu.Processor.TaskProcessor;
+import ConsoleUI.Menu.builder.MapBuilderDisplayMenu;
 import entity.Task;
 import io.InputReader;
 import Service.TaskService;
 
 import java.util.List;
+import java.util.Map;
 
 public class DisplayMenu {
     private final TaskService taskService;
     private final InputReader input;
+    private final Map<String, TaskProcessor> displayMenu;
 
     public DisplayMenu(TaskService taskService, InputReader input) {
         this.taskService = taskService;
         this.input = input;
+        MapBuilderDisplayMenu mapBuilderDisplayMenu = new MapBuilderDisplayMenu(taskService, input);
+        this.displayMenu = mapBuilderDisplayMenu.displayMenu();
     }
 
     public void show() {
@@ -23,46 +29,17 @@ public class DisplayMenu {
 
             String choice = input.readString("Ваш вибір: ");
 
-            switch (choice){
-                case "1":
-                    getAllTask();
-                    break;
-                case "2":
-                    getAllOverdueTasks();
-                    break;
-                case "0":
-                    return;
-                default:
-                    System.out.println("Ведіть номер з пунтку, або натисніть 0 для вихаду в меню");
+            if (choice.equals("0")) {
+                return;
+            } else {
+                TaskProcessor processor = displayMenu.get(choice);
+                if (processor != null) {
+                    processor.process();
+                } else {
+                    System.out.println("Ведіть номер з пункту, або натисніть 0 для виходу в меню");
+                }
             }
         }
     }
 
-    public void getAllTask(){
-        List<Task> allTasks = taskService.getAll();
-
-        if (allTasks.isEmpty()) {
-            System.out.println("Список порожній!");
-        }
-
-        System.out.println("Список завдань: ");
-
-        for (Task task : allTasks) {
-            System.out.println(task);
-        }
-    }
-
-    public void getAllOverdueTasks(){
-        List<Task> allOverdueTasks = taskService.getOverdueTasks();
-
-        if(allOverdueTasks.isEmpty()){
-            System.out.println("Не має протермінованих завдань: ");
-        }
-
-        System.out.println("Список протермінованих завданнь " + allOverdueTasks.size() + " :");
-
-        for (Task allOverdueTask : allOverdueTasks) {
-            System.out.println(allOverdueTask);
-        }
-    }
 }

@@ -1,5 +1,6 @@
 package ConsoleUI.Menu.builder;
 
+import ConsoleUI.Menu.Processor.Impl.Display.OpenDisplayMenuProcessor;
 import ConsoleUI.Menu.Processor.Impl.Edit.OpenEditMenuProcessor;
 import ConsoleUI.Menu.Processor.Impl.Search.OpenSearchMenuProcessor;
 import Service.TaskService;
@@ -28,10 +29,12 @@ public class MapBuilder {
         TaskProcessor delete = new DeleteProcessor(taskService, input);
         TaskProcessor edit = new OpenEditMenuProcessor(taskService, input);
         TaskProcessor search = new OpenSearchMenuProcessor(taskService, input);
+        TaskProcessor display = new OpenDisplayMenuProcessor(taskService, input);
         map.put(add.choice(), add);
         map.put(delete.choice(), delete);
         map.put(edit.choice(), edit);
         map.put(search.choice(), search);
+        map.put(display.choice(), display);
 
         return map;
     }

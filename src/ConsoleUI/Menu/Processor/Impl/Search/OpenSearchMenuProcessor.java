@@ -8,6 +8,7 @@ import io.InputReader;
 public class OpenSearchMenuProcessor implements TaskProcessor {
     private final TaskService taskService;
     private final InputReader input;
+    private SearchMenu searchMenu;
 
     public OpenSearchMenuProcessor(TaskService taskService, InputReader input){
         this.taskService = taskService;
@@ -21,7 +22,7 @@ public class OpenSearchMenuProcessor implements TaskProcessor {
 
     @Override
     public void process() {
-        SearchMenu searchMenu = new SearchMenu(taskService, input);
+        searchMenu = new SearchMenu(taskService, input);
         searchMenu.show();
     }
 }
