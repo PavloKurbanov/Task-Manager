@@ -1,7 +1,5 @@
-package ConsoleUI.Menu;
+package ConsoleUI.Menu.Processor.Impl.Edit;
 
-import ConsoleUI.Menu.Processor.Impl.Edit.ChangeDeadlineProcessor;
-import ConsoleUI.Menu.Processor.Impl.Edit.ChangeStatusProcessor;
 import ConsoleUI.Menu.Processor.TaskProcessor;
 import IO.InputReader;
 import Service.TaskService;

@@ -1,8 +1,7 @@
-package ConsoleUI.Menu;
+package ConsoleUI.Menu.Processor.Impl.Edit;
 
+import ConsoleUI.Menu.DisplayMenu;
 import ConsoleUI.Menu.Processor.TaskProcessor;
-import DateTime.TimeFormatter;
-import Entities.Task;
 import IO.InputReader;
 import Service.TaskService;
 
@@ -29,7 +28,7 @@ public class EditMenu {
             String choice = input.readString("Ваш вибір: ");
 
             if(choice.equals("0")) {
-                System.out.println("Дякуємо! На все добре");
+                return;
             } else {
                 TaskProcessor processor = mapBuilderEditMenu.get(choice);
                 if(processor != null) {

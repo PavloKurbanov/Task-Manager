@@ -1,5 +1,7 @@
 package ConsoleUI.Menu;
 
+import ConsoleUI.Menu.Processor.Impl.Edit.MapBuilderEditProcessor;
+import ConsoleUI.Menu.Processor.Impl.Search.MapBuilderSearchProcessor;
 import Service.TaskService;
 import IO.InputReader;
 import ConsoleUI.Menu.Processor.TaskProcessor;
@@ -12,12 +14,10 @@ import java.util.Map;
 public class MapBuilder {
     private final TaskService taskService;
     private final InputReader input;
-    private final MapBuilderEditMenu mapBuilderEditMenu;
 
     public MapBuilder(TaskService taskService, InputReader input) {
         this.taskService = taskService;
         this.input = input;
-        this.mapBuilderEditMenu = new MapBuilderEditMenu(taskService, input);
     }
 
     public Map<String, TaskProcessor> buildMenu() {
@@ -26,11 +26,12 @@ public class MapBuilder {
 
         TaskProcessor add = new AddProcessor(taskService, input);
         TaskProcessor delete = new DeleteProcessor(taskService, input);
+        TaskProcessor edit = new MapBuilderEditProcessor(taskService, input);
+        TaskProcessor search = new MapBuilderSearchProcessor(taskService, input);
         map.put(add.choice(), add);
         map.put(delete.choice(), delete);
-
-        Map<String, TaskProcessor> editMenu = mapBuilderEditMenu.buildEditMenu();
-        map.putAll(editMenu);
+        map.put(edit.choice(), edit);
+        map.put(search.choice(), search);
 
         return map;
     }

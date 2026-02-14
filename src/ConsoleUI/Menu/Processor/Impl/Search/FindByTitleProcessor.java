@@ -22,7 +22,7 @@ public class FindByTitleProcessor implements TaskProcessor {
 
     @Override
     public void process() {
-        String readString = input.readString("Введінь назву завдання");
+        String readString = input.readString("Введінь назву завдання: ");
         try {
             Task byTitle = taskService.findByTitle(readString);
             if (byTitle != null) {
